@@ -1,0 +1,74 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header{
+  background: #495057;
+  color: white;
+  padding: 2% 0;
+}
+
+div.container{
+  width: 70%;
+  margin: 0 auto;
+}
+
+div.container h1{
+  color: #fff;
+}
+div.topo{
+  padding: 5% 0;
+}
+
+div.topo form input{
+  padding: .375rem .75rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  width: 30%;
+}
+div.topo form button{
+  border: none;
+  padding: 7px 20px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(73 165 88);
+  border-radius: 5px;
+}
+
+div.box-infos #date-user{
+  display: flex;
+}
+
+div.box-infos #date-user p{
+  line-height: 30px;
+}
+div.box-infos #date-user p span{
+ font-weight: 700;
+}
+
+div.box-infos #date-user div.avatar{
+  width: 150px;
+  height: 150px;
+}
+div.box-infos #date-user div.avatar img{
+  max-width: 100%;
+}
+div.box-infos #date-user .user_data {
+  margin-left: 5%;
+}
+
+div.box-infos #newest-repositories{
+  margin-top: 3em;
+}
+div.box-infos #newest-repositories h4{
+  margin-bottom: 10px;
+}
+div.box-infos #newest-repositories span{
+  line-height: 20px;
+  display: block;
+}
