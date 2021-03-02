@@ -1,96 +1,26 @@
-window.onload = function () {
+const $form = document.getElementById('form-profile-github'),
+$usernameInput = document.getElementById('username'),
+$message = document.getElementById('message'),
+$userProfile = document.getElementById('user-profile'),
+$userRepositories = document.getElementById('newest-repositories');
 
-  function userConsultation(name_user){
-    return fetch(`https://api.github.com/users/${name_user.value}`)
-  }
+$form.addEventListener('submit',  (event) => {
+  event.preventDefault();
 
-  const form = document.getElementById('form-profile-github')
-  form.addEventListener('submit', async function (e) {
-      e.preventDefault()
-      doSubmit()
+  Form.getUsername($usernameInput)
+  .then(username => RequestManager.getUserProfile(username))
+  .then(user => RequestManager.getLastUserRepositories(user))
+  .then(userWithRepos => {
+    Renderer.renderUserProfile(userWithRepos, $userProfile);
+    Renderer.renderUserRepositories(userWithRepos.lastRepositories,$userRepositories);
+    Renderer.renderError(null, $message)
+    Form.clearInputs($form); 
+  })
+  .catch(error => {
+    Renderer.renderError(error, $message);
+    Form.clearInputs($form); 
+    Renderer.renderUserProfile(null ,$userProfile);
+    Renderer.renderUserRepositories(null, $userRepositories);
   })
 
-   async function doSubmit(){
-     try {
-      const username = document.getElementById('username')
-      if(username.value == ''){
-        clearScreenData()
-        document.getElementById('message').innerHTML = 'Preenche o campo nome do usuário'
-      }else{
-        const response = await userConsultation(username)
-        if(response.status === 404){
-            document.getElementById('message').innerHTML = 'Usuário não encontrado'
-            clearScreenData()
-          }else{
-          const dateUser = await response.json()
-          document.getElementById('date-user').innerHTML = renderUserTemplate(dateUser)
-          searchesLastFourRepositories(dateUser);
-          document.getElementById('message').innerHTML = ''
-          document.getElementById('username').value = ''
-        }
-      }
-
-     } catch (error) {
-      document.getElementById('message').innerHTML = 'Lamentamos, ocorreu um erro. Tente novamente mais tarde.'
-      clearScreenData();
-     }
-  }
-
-    function renderUserTemplate(user_data) {
-      return `
-        <div class="avatar">
-          <img src="${user_data.avatar_url}"/>
-        </div>
-        <div class="user_data">
-          <p>Usuário: <span>${user_data.name}</span></p>
-          <p>Seguidores: <span>${user_data.followers}</span></p>
-          <p>Repositório: <span>${user_data.public_repos}</span></p>
-        </div>
-      `
-    }
-
-  async function searchesLastFourRepositories (data) {
-    const response = await fetch(`${data.repos_url}?sort=created_at&per_page=4`)
-    const repositories = await  response.json()
-    document.getElementById('newest-repositories').innerHTML = repositoryLists(repositories)
-  }
-
-  function repositoryLists(repositories) {
-    let html = '<h4>Repositorios mais populares</h4>'
-    repositories.forEach(element => {
-      html = html + renderRepositoryTemplate(element)
-    });
-    return html
-  }
-
-  function renderRepositoryTemplate(element) {
-    return `
-      <span>${element.name}</span>
-    `
-  }
-
-  function clearScreenData(){
-    document.getElementById('date-user').innerHTML = ''
-    document.getElementById('newest-repositories').innerHTML = ''
-    document.getElementById('username').value = ''
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})

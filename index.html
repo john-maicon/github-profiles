@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html lang="pr-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfis GitHub</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
+  <script src="js/app.js" defer></script>
+  <script src="js/main.js" defer></script>
 
-  <header>
-    <div class="container">
-      <h1>Perfis GitHub</h1>
-    </div>
+</head>
+
+<body class="bg-green-100 p-5">
+
+  <header class="text-center">
+    <h1 class="font-bold text-3xl uppercase">Perfis GitHub</h1>
+
+    <form id="form-profile-github" method="get" class="w-full flex items-center justify-center">
+      <input id="username" type="text" placeholder="Digite o nome do usuário" class="float-left mt-5 mb-5 pl-5 pr-5 pt-2 pb-2 border border-gray-300 rounded-tl-md rounded-bl-md mr-0">
+      <button type="submit" class="p-2.5 rounded-tr-md rounded-br-md bg-green-500 ml-0 float-left border-green-500 border-t border-b border-r hover:bg-green-400 transition transition-all delay-100 text-white uppercase text-sm">Pesquisar</button>
+    </form>
+
   </header>
 
-  <section>
-    <div class="container">
-      <div class="topo">
-        <form id="form-profile-github" method="get">
-          <input id="username" type="text" placeholder="Digite o nome do usuário">
-          <button type="submit">Pesquisar</button>  
-        </form>
+  <main class="w-full flex items-center justify-center mt-5">
+    <div class="box-infos">
+      <div id="user-profile">
       </div>
-  
-      <div class="box-infos">
-        <div id="date-user">
-        </div>
-        <div id="newest-repositories">
-        </div>
+      <div id="newest-repositories">
       </div>
-      <div id="message"></div>
     </div>
-  </section>
+    <div id="message"></div>
+  </main>
 
-  <section>
-    <div class="container">
-    </div>
-  </section>
-
-  <script src="js/main.js"></script>
 </body>
+
 </html>
